@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>React Slider</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="root"></div>
+
+
+<script type="text/babel">
+const app = document.getElementById('root');
+
+
+class Slider extends React.Component{
+    constructor(){
+    super();
+    this.state = {
+        images:[
+            'http://www.lovethispic.com/uploaded_images/82613-Beautiful-Spring-Flowers.jpg',
+            'https://themysteriousworld.com/wp-content/uploads/2015/09/water-lily.jpg',
+            'https://wallpaper-house.com/data/out/9/wallpaper2you_349813.jpg',
+            'http://stuffpoint.com/beautiful-birds/image/42628-beautiful-birds-beautiful-yellow-birds.jpg'
+
+        ],
+        current: 0,
+        disabled: false
+
+    };
+        this.showPrev = this.showPrev.bind(this);
+        this.showNext = this.showNext.bind(this);
+    }
+
+showPrev(){
+        console.log(this.state.current - 1);
+               //if current = 0;
+    if(this.state.current <= this.state.images.length-1){
+        this.setState({current: this.state.current - 1});
+    }
+    if(this.state.current <= 0){
+        this.setState({current: this.state.images.length - 1});
+    }
+
+}
+showNext() {
+    console.log(this.state.current );
+    if(this.state.current == this.state.images.length-1){
+        this.setState({current:0});
+    }
+    if(this.state.current < this.state.images.length-1){
+        this.setState({current: this.state.current + 1});
+    }
+
+
+}
+
+    render(){
+        return <div className="slider-box">
+            <h1>React slider</h1>
+                <div className="slide">
+
+
+                   <img className="slidePic" src={this.state.images[this.state.current]} alt="" />
+                    <a href="#" className="prev" onClick={this.showPrev}>
+                        <i className="material-icons">arrow_back_ios</i>
+                    </a>
+                    <a href="#"  className="next" onClick={this.showNext}>
+                        <i className="material-icons">arrow_back_ios</i>
+                    </a>
+                </div>
+
+        </div>
+    }
+}
+ReactDOM.render(
+ <Slider/>,
+    app);
+</script>
+
+</body>
+</html>
